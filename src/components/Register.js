@@ -1,23 +1,48 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import {fetchRegister} from '../actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default class Home extends React.Component {
+class Register extends React.Component {
+  state = {
+      name: '',
+      email: '',
+      password: '',
+      message: ''
+  }
+
+  handleName = (e) => (this.setState({name: e.target.value}))
+  handleEmail = (e) => (this.setState({email: e.target.value}))
+  handlePassword = (e) => (this.setState({password: e.target.value}))
+  handleMessage = (e) => (this.setState({message: e.target.value}))
+
   render() {
     return (
       <div>
         <h2>Register</h2>
-        <form>
           <label>Name</label>
-          <input name='name' />
+          <input onChange={this.handleName} value={this.state.name} name='name' />
           <label>Email</label>
-          <input name='email' />
+          <input onChange={this.handleEmail} value={this.state.email} name='email' />
           <label>Password</label>
-          <input name='password' />
+          <input onChange={this.handlePassword} value={this.state.password} name='password' />
           <label>Message</label>
-          <textarea name='message' />
-          <button type='submit'>Submit</button>
-        </form>
+          <textarea onChange={this.handleMessage} value={this.state.message} name='message' />
+          <button onClick={this.props.fetchRegister}>Submit</button>
       </div>
     )
   }
 }
+
+// const mapStateToProps = state => ({
+//   name: state.name,
+//   email: state.email,
+//   password: state.password,
+//   message: state.message
+// })
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ fetchRegister }, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(Register);
