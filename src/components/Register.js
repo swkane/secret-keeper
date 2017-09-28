@@ -21,25 +21,19 @@ class Register extends React.Component {
       <div>
         <h2>Register</h2>
           <label>Name</label>
-          <input onChange={this.handleName} value={this.state.name} name='name' />
+          <input type='text' onChange={this.handleName} value={this.state.name} name='name' />
           <label>Email</label>
           <input onChange={this.handleEmail} value={this.state.email} name='email' />
           <label>Password</label>
           <input onChange={this.handlePassword} value={this.state.password} name='password' />
           <label>Message</label>
           <textarea onChange={this.handleMessage} value={this.state.message} name='message' />
-          <button onClick={this.props.fetchRegister}>Submit</button>
+          <button onClick={this.props.fetchRegister(this.state.name, this.state.email, this.state.password, this.state.message)}>Submit</button>
       </div>
     )
   }
 }
 
-// const mapStateToProps = state => ({
-//   name: state.name,
-//   email: state.email,
-//   password: state.password,
-//   message: state.message
-// })
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ fetchRegister }, dispatch)

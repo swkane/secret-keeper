@@ -19,7 +19,7 @@ export const login = (email, password) => ({
 // Async Actions
 export const fetchRegister = (name, email, password, message) => (
   (dispatch, getState) => (
-    fetch('https://user-auth-test.herokuapp.com/register', {body: {name, email, password, message}})
+    fetch('https://user-auth-test.herokuapp.com/register', {method: 'POST', body: {name, email, password, message}})
     .then(response => response.json())
     .then(() => console.log('You successfully registered!'))
   )
