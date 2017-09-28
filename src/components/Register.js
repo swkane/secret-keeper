@@ -10,27 +10,23 @@ class Register extends React.Component {
       password: '',
       message: ''
   }
-
-  handleName = (e) => (this.setState({name: e.target.value}))
-  handleEmail = (e) => (this.setState({email: e.target.value}))
-  handlePassword = (e) => (this.setState({password: e.target.value}))
-  handleMessage = (e) => (this.setState({message: e.target.value}))
+  handle = field => e => this.setState({[field]: e.target.value})
 
   render() {
     return (
       <div>
         <h2>Register</h2>
           <label>Name</label>
-          <input type='text' onChange={this.handleName} value={this.state.name} name='name' />
+          <input type='text' onChange={this.handle('name')} value={this.state.name} name='name' />
           <label>Email</label>
-          <input onChange={this.handleEmail} value={this.state.email} name='email' />
+          <input onChange={this.handle('email')} value={this.state.email} name='email' />
           <label>Password</label>
-          <input onChange={this.handlePassword} value={this.state.password} name='password' />
+          <input onChange={this.handle('password')} value={this.state.password} name='password' />
           <label>Message</label>
-          <textarea onChange={this.handleMessage} value={this.state.message} name='message' />
-          <button onClick={this.props.fetchRegister(this.state.name, this.state.email, this.state.password, this.state.message)}>Submit</button>
+          <textarea onChange={this.handle('message')} value={this.state.message} name='message' />
+          <button onClick={() => this.props.fetchRegister(this.state.name, this.state.email, this.state.password, this.state.message)}>Submit</button>
       </div>
-    )
+    );
   }
 }
 
